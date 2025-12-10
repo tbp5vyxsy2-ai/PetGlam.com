@@ -1,0 +1,299 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>PetGlam — Productos personalizados de mascotas</title>
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&family=Montserrat:wght@300;600&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#fff9fc;
+      --pink:#ff6fa3;
+      --pink-2:#ff8bb8;
+      --yellow:#ffd166;
+      --green:#7bd389;
+      --muted:#6e6e6e;
+      --card:#ffffff;
+      --shadow: 0 6px 22px rgba(15,20,30,0.08);
+      --border-pink: 3px solid #ff6fa3;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: 'Quicksand', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background: linear-gradient(180deg, #fff 0%, var(--bg) 100%);
+      color:#222;
+      line-height:1.45;
+    }
+
+    header{
+      display:flex;
+      gap:12px;
+      align-items:center;
+      justify-content:space-between;
+      padding:10px 14px;
+      position:sticky;
+      top:0;
+      background:rgba(255,255,255,0.95);
+      backdrop-filter: blur(6px);
+      z-index:20;
+    }
+    .logo {
+      display:flex;
+      gap:10px;
+      align-items:center;
+      text-decoration:none;
+      color:inherit;
+    }
+    .logo img {
+      height:40px;
+      width:auto;
+      border-radius:5px;
+    }
+    .brand {
+      font-weight:700;
+      font-size:18px;
+    }
+    .small {
+      font-size:12px;
+      color:var(--muted);
+    }
+    nav a.cta {
+      background:linear-gradient(90deg,var(--pink), var(--pink-2));
+      color:#fff;
+      padding:8px 12px;
+      border-radius:10px;
+      text-decoration:none;
+      font-weight:600;
+      box-shadow: var(--shadow);
+      white-space:nowrap;
+    }
+
+    main{padding:16px; max-width:1100px; margin:0 auto;}
+    .hero-card{ background:linear-gradient(180deg, rgba(255,255,255,0.92), #fff); padding:16px; border-radius:16px; box-shadow:var(--shadow); display:flex; gap:12px; align-items:center; }
+    .hero-text h1{ margin:0 0 6px 0; font-size:22px; }
+    .hero-text p{ margin:0 0 10px 0; color:var(--muted) }
+
+    .grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:12px; margin-top:14px; }
+    @media(min-width:720px){ .grid{ grid-template-columns:repeat(3,1fr) } }
+
+    .card{ background:var(--card); border-radius:12px; padding:12px; box-shadow:var(--shadow); cursor:pointer; }
+    .product-img{ border-radius:10px; height:170px; background-size:cover; background-position:center; }
+
+    .gallery{ display:flex; gap:8px; flex-wrap:wrap; margin-top:12px }
+    .gallery img.tile {
+      width:calc(33% - 10px);
+      border-radius:12px;
+      box-shadow:var(--shadow);
+      border:var(--border-pink);
+      cursor:pointer;
+      transition: transform 0.2s;
+    }
+
+    form.card{ display:grid; gap:10px }
+    label{ font-size:13px; color:var(--muted) }
+    input[type="text"], select, textarea{ padding:10px; border-radius:8px; border:1px solid #eee; font-size:15px; width:100%; outline:none; }
+    textarea{ min-height:90px; resize:vertical }
+
+    footer{ margin:18px 0 40px; text-align:center; color:var(--muted); font-size:14px }
+  </style>
+</head>
+<body>
+
+<header>
+  <a class="logo" href="#home">
+    <img src="https://i.ibb.co/nM9McwPC/b53ce2fd-7fdd-4103-b7c6-d3ffaa144777.jpg" alt="Logo PetGlam">
+    <div>
+      <div class="brand">PetGlam</div>
+      <div class="small">Productos personalizados — Envío 3–7 días</div>
+    </div>
+  </a>
+  <nav><a href="#order" class="cta">Pedir ahora</a></nav>
+</header>
+
+<main id="home">
+
+<section class="hero">
+  <div class="hero-card">
+    <div class="hero-text">
+      <h1>Productos personalizados con tu mascota</h1>
+      <p>Chapas, llaveros y pulseras hechas a mano. Calidad garantizada.</p>
+      <div class="btn btn-primary" onclick="document.getElementById('order').scrollIntoView({behavior:'smooth'})">Pedir ahora</div>
+    </div>
+  </div>
+</section>
+
+<section id="products">
+  <h3>Productos disponibles</h3>
+
+  <div class="grid">
+    <div class="card product-btn" data-type="chapas">
+      <div class="product-img" style="background-image:url('https://i.ibb.co/QvKj4D91/IMG-8692.jpg');"></div>
+      <strong>Chapas</strong>
+    </div>
+
+    <div class="card product-btn" data-type="llaveros">
+      <div class="product-img" style="background-image:url('https://i.ibb.co/qMMpbRbV/IMG-8694.png');"></div>
+      <strong>Llaveros</strong>
+    </div>
+
+    <div class="card product-btn" data-type="pulseras">
+      <div class="product-img" style="background-image:url('https://i.ibb.co/rGZXM0sy/IMG-8742.jpg');"></div>
+      <strong>Pulseras</strong>
+    </div>
+  </div>
+
+  <div id="productGallery" class="gallery"></div>
+</section>
+
+<section id="order" style="margin-top:18px">
+  <h3>Formulario de pedido</h3>
+
+  <form class="card" id="orderForm">
+    <div><label>Nombre del cliente</label><input id="name" name="name" type="text" required></div>
+
+    <div class="row">
+      <div class="col">
+        <label>Nombre de la mascota</label>
+        <input id="petName" name="petName" type="text" required>
+      </div>
+      <div class="col">
+        <label>Producto</label>
+        <select id="style" name="style">
+          <option value="Chapas">Chapas</option>
+          <option value="Llaveros">Llaveros</option>
+          <option value="Pulseras">Pulseras</option>
+        </select>
+      </div>
+    </div>
+
+    <div><label>Instrucciones</label><textarea id="notes" name="notes"></textarea></div>
+
+    <div><label>Foto de la mascota</label><input id="photo" name="photo" type="file" accept="image/*" required></div>
+
+    <div style="display:flex; gap:8px; align-items:center">
+      <button type="button" class="btn btn-primary" id="sendBtn">Enviar pedido</button>
+      <div class="small">O envía por email: <strong id="emailText">hola@petglam.example</strong></div>
+    </div>
+
+    <div id="msg" class="small" style="color:var(--muted)"></div>
+  </form>
+
+<!-- MÉTODOS DE PAGO — LOGOS CENTRADOS SIN BIZUM -->
+<section id="payments" style="margin-top:22px">
+  <h3>Métodos de pago disponibles</h3>
+
+  <div style="
+    background:white;
+    padding:16px;
+    border-radius:12px;
+    box-shadow:0 6px 22px rgba(15,20,30,0.08);
+    border:3px solid #ff6fa3;
+  ">
+
+    <div style="
+      display:flex;
+      gap:30px;
+      flex-wrap:wrap;
+      margin-top:12px;
+      align-items:center;
+      justify-content:center;
+    ">
+
+      <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Visa_Inc._logo.svg" style="height:38px;">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/0/04/Mastercard-logo.png" style="height:38px;">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/b/b5/PayPal.svg" style="height:38px;">
+
+    </div>
+
+    <p style="margin-top:14px; font-size:14px; color:#6e6e6e">
+      *Después de enviar tu formulario, te indicaremos cómo realizar el pago.*
+    </p>
+  </div>
+</section>
+
+<footer>
+  © <span id="year"></span> PetGlam — Productos personalizados 💖
+</footer>
+
+</main>
+
+<script>
+document.getElementById('year').textContent = new Date().getFullYear();
+
+const emailText = document.getElementById('emailText');
+const msg = document.getElementById('msg');
+
+emailText.addEventListener('click', async () => {
+  try{ await navigator.clipboard.writeText(emailText.textContent.trim()); msg.textContent = 'Email copiado.'; }
+  catch(e){ msg.textContent = 'Mantén pulsado para copiar.'; }
+});
+
+document.getElementById('sendBtn').addEventListener('click', () => {
+  const fd = new FormData(document.getElementById('orderForm'));
+  if(!fd.get('name') || !fd.get('petName') || !fd.get('photo').name){
+    msg.style.color = 'crimson';
+    msg.textContent = 'Completa nombre, mascota y sube una foto.';
+    return;
+  }
+  const to = emailText.textContent.trim();
+  const subject = encodeURIComponent("Pedido: " + fd.get('petName'));
+  let body  = "Nombre: " + fd.get('name') + "%0A";
+  body += "Mascota: " + fd.get('petName') + "%0A";
+  body += "Producto: " + fd.get('style') + "%0A%0A";
+  body += "Instrucciones:%0A" + encodeURIComponent(fd.get('notes')) + "%0A%0A";
+  body += "⛔ Recuerda adjuntar la foto antes de enviar.%0A";
+
+  window.location.href = `mailto:${to}?subject=${subject}&body=${body}`;
+});
+
+const productImages = {
+  chapas: [
+    'https://i.ibb.co/Q70NJ7z4/IMG-8697.jpg',
+    'https://i.ibb.co/Kkm684d/IMG-8698.jpg',
+    'https://i.ibb.co/2B7xL9q/IMG-8700.jpg',
+    'https://i.ibb.co/qL9ZZkrj/IMG-8699.jpg',
+    'https://i.ibb.co/CssSnKPS/IMG-8709.jpg',
+    'https://i.ibb.co/cKQ6T4wq/IMG-8701.jpg',
+    'https://i.ibb.co/9mNdZ699/IMG-8705.jpg',
+    'https://i.ibb.co/Z6F5Trvf/IMG-8706.jpg',
+    'https://i.ibb.co/fYWbxgv7/IMG-8707.jpg'
+  ],
+  llaveros: [
+    'https://i.ibb.co/N2y73PzG/IMG-8712.jpg',
+    'https://i.ibb.co/5gcBF4J3/IMG-8713.jpg',
+    'https://i.ibb.co/dwknXsf8/IMG-8714.jpg',
+    'https://i.ibb.co/Z3xHQtf/IMG-8715.jpg',
+    'https://i.ibb.co/NnrH3CBL/IMG-8716.jpg',
+    'https://i.ibb.co/3mY0xdP0/IMG-8717.jpg',
+    'https://i.ibb.co/Kjx3cnm5/IMG-8722.jpg',
+    'https://i.ibb.co/CTQL99D/IMG-8720.jpg',
+    'https://i.ibb.co/GXftQSw/IMG-8721.jpg'
+  ],
+  pulseras: [
+    'https://i.ibb.co/bgJMYzJJ/IMG-8739.jpg',
+    'https://i.ibb.co/bjV4K0cb/IMG-8738.jpg',
+    'https://i.ibb.co/fGXZL1HJ/IMG-8737.jpg',
+    'https://i.ibb.co/xqNRCtpp/IMG-8736.jpg',
+    'https://i.ibb.co/3m47Zg17/IMG-8735.jpg',
+    'https://i.ibb.co/vCMJhChq/IMG-8734.jpg',
+    'https://i.ibb.co/SDNmgFW5/IMG-8732.jpg',
+    'https://i.ibb.co/svYK5h33/IMG-8728.jpg',
+    'https://i.ibb.co/m5v2rTQz/IMG-8726.jpg'
+  ]
+};
+
+const galleryDiv = document.getElementById('productGallery');
+document.querySelectorAll('.product-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const type = btn.dataset.type;
+    galleryDiv.innerHTML = productImages[type].map(src =>
+      `<img class="tile" src="${src}" onclick="window.open('${src}','_blank')">`
+    ).join('');
+    galleryDiv.scrollIntoView({ behavior: 'smooth' });
+  });
+});
+</script>
+
+</body>
+</html>
